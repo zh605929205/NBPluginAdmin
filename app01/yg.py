@@ -26,10 +26,16 @@ class YinGunUserInfo(v1.BaseYinGunAdmin):
             param_dict = QueryDict(mutable=True)  # 获取 字典 对象，改成可修改的类型
             if self.request.GET:  # 如果有值
                 param_dict["_changelistfilter"] = self.request.GET.urlencode()  # 就把获取到的传值原封不动的 写入queryset对象中
-            base_edit_url = reverse("{0}:{1}_{2}_change".format(self.site.namespace, self.app_label, self.model_name),args=(obj.pk,))  # 反向获取添加操作的url
-            edit_url = "{0}?{1}".format(base_edit_url, param_dict.urlencode())  # 把值传给添加url，携带用以返回当前目录
 
-            return mark_safe("<a href='{0}'>编辑</a>".format(edit_url))
+            base_edit_url = reverse("{0}:{1}_{2}_change".format(self.site.namespace, self.app_label, self.model_name),
+                                    args=(obj.pk,))  # 反向获取添加操作的url
+            base_del_url = reverse("{0}:{1}_{2}_delete".format(self.site.namespace, self.app_label, self.model_name),
+                                   args=(obj.pk,))  # 反向获取添加操作的url
+
+            edit_url = "{0}?{1}".format(base_edit_url, param_dict.urlencode())  # 把值传给添加url，携带用以返回当前目录
+            del_url = "{0}?{1}".format(base_del_url, param_dict.urlencode())  # 把值传给添加url，携带用以返回当前目录
+
+            return mark_safe("<a href='{0}'>编辑</a> | <a href='{1}'>删除</a>".format(edit_url, del_url))
 
     def checkbox(self,obj=None,is_header=False):
         """

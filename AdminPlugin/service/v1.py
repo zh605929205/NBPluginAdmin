@@ -117,6 +117,12 @@ class BaseYinGunAdmin(object):
         :param request:
         :return:
         """
+        self.model_class.objects.filter(pk=pk).delete()
+        paras = request.GET.get("_changelistfilter")
+        base_list_url = reverse(
+            "{0}:{1}_{2}_changelist".format(self.site.namespace, self.app_label, self.model_name))  # 反向获取添加操作的url
+        list_url = "{0}?{1}".format(base_list_url, paras)  # 把值传给添加url，携带用以返回当前目录
+        return redirect(list_url)
 
     def change_view(self,request,pk):
         """
