@@ -1,0 +1,19 @@
+{#渲染页面#}
+<table border="1">
+    <thead>
+        <tr>
+            {% for row in v_head %}
+                <td>{{ row }}</td>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in xxx %}
+        <tr>
+            {% for val in item %}
+                <td>{{ val }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
