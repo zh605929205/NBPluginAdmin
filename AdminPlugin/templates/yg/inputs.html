@@ -1,0 +1,10 @@
+
+{% for item in inputs %}
+    <div class="form-group">
+        <label class="col-sm-1">{{ item.0 }}</label>
+        <div class="col-sm-11">
+            <span class="col-sm-7">{{ item.1 }}</span>
+            <span style="color: red;font-size: 12px;" class="col-sm-5">{{ item.1.errors.0 }}</span>
+        </div>
+    </div>
+{% endfor %}

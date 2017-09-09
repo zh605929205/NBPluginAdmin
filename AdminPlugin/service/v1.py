@@ -5,6 +5,7 @@ from django.conf.urls import url,include
 from django.urls import reverse
 from django.http.request import QueryDict
 from django.forms import ModelForm
+from django.forms import widgets
 
 class BaseYinGunAdmin(object):
 
@@ -33,10 +34,23 @@ class BaseYinGunAdmin(object):
             #     class Meta:
             #         model = self.model_class
             #         fields = "__all__"
+            s = self.model_class.__doc__.split(",")[1:-1]
+            error_msg = {}
+            wid = {}
+            for i in s:
+                error_msg[i] = {'required':'内容不能为空','invalid':'格式错误'}
+                wid[i] = widgets.TextInput(attrs={"class":"form-control"},)
+
+            print(error_msg)
+            print(wid)
+            #未解决
             params = {
                 "model":self.model_class,
                 "fields":"__all__",
+                "error_messages":error_msg,
+                "widgets":wid,
             }
+
             _m = type("Meta",(object,),params)
             MyModelForm = type("MyModelForm",(ModelForm,),{"Meta":_m})
             return MyModelForm
@@ -102,11 +116,10 @@ class BaseYinGunAdmin(object):
                 base_list_url = reverse("{0}:{1}_{2}_changelist".format(self.site.namespace, self.app_label, self.model_name))  # 反向获取添加操作的url
                 list_url = "{0}?{1}".format(base_list_url, paras)  # 把值传给添加url，携带用以返回当前目录
                 return redirect(list_url)
-            else:
-                #有错误信息
-                pass
+
         context = {
             "form":model_form_obj,
+            "ygadmin_obj": self,
         }
 
         return render(request,"yg/add.html",context)
@@ -147,11 +160,11 @@ class BaseYinGunAdmin(object):
                                                                         self.model_name))  # 反向获取添加操作的url
                 list_url = "{0}?{1}".format(base_list_url, paras)  # 把值传给添加url，携带用以返回当前目录
                 return redirect(list_url)
-            else:
-                pass
+
         # 3. 返回页面
         context = {
             "form": model_form_obj,
+            "ygadmin_obj": self,
         }
 
         return render(request, "yg/edit.html", context)

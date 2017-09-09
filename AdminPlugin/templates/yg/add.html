@@ -1,16 +1,21 @@
-{% load yg_list %}
+{% load yg_inputs %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>添加数据</h1>
-    <form method="POST" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="提交">
-    </form>
+<h1>添加数据</h1>
+<form class="form-horizontal" novalidate>
+    {% csrf_token %}
+    {% func form ygadmin_obj %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">提交</button>
+        </div>
+    </div>
+</form>
 </body>
 </html>
