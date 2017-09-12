@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url,include
 from AdminPlugin.service import v1
 from django.contrib import admin
-
+from app01 import views
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^yg/', v1.site.urls),
+    url(r'^test/', views.test),
+    url(r'^add_test/', views.add_test),
 ]

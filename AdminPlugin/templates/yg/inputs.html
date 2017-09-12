@@ -1,10 +1,39 @@
-
-{% for item in inputs %}
+<form method="POST" class="form-horizontal" novalidate>
+    {% csrf_token %}
+    {% for col in inputs %}
+        <div class="form-group">
+            <label class="col-sm-2">{{ col.item.field.label }}</label>
+            <div class="col-sm-10">
+                <span class="col-sm-5">{{ col.item }}
+                    <span style="color: red;font-size: 12px;">{{ col.item.errors.0 }}</span>
+                </span>
+                {% if col.is_popup %}
+{#                    <a href="{{ col.popup_url }}">添加</a>#}
+                    <button class="btn btn-primary btn-sm" onclick="popupOpen('{{ col.popup_url }}')">添加</button>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
     <div class="form-group">
-        <label class="col-sm-1">{{ item.0 }}</label>
-        <div class="col-sm-11">
-            <span class="col-sm-7">{{ item.1 }}</span>
-            <span style="color: red;font-size: 12px;" class="col-sm-5">{{ item.1.errors.0 }}</span>
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">提交</button>
         </div>
     </div>
-{% endfor %}
+</form>
+
+<script>
+
+    function popupOpen(url) {
+        window.open(url,"xxx","status=1,height:400,width:600,toolbar=0,resizeable=0");
+    }
+
+    function popupCallBack(data_dict) {
+        var tag = document.createElement('option');
+        tag.innerHTML = data_dict.text;
+        tag.setAttribute('value',data_dict.pk);
+        tag.setAttribute('selected','selected');
+
+        document.getElementById(data_dict.popid).appendChild(tag);
+    }
+
+</script>

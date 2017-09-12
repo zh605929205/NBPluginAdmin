@@ -21,7 +21,7 @@ class Users(models.Model):
     age = models.IntegerField(verbose_name="年龄")
 
     ug = models.ForeignKey(to=UserGroup,null=True,blank=True,verbose_name="用户组")
-    rm = models.ManyToManyField(Role,verbose_name="角色")
+    rm = models.ManyToManyField(to=Role,verbose_name="角色")
 
     def __str__(self):
         return self.name

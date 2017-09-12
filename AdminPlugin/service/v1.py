@@ -6,12 +6,14 @@ from django.urls import reverse
 from django.http.request import QueryDict
 from django.forms import ModelForm
 from django.forms import widgets
+import copy
 
 class BaseYinGunAdmin(object):
 
     #用于app内所有数据库信息操作的生成
 
     list_display = "__all__"
+    action_list = []
     operate_model_form = None  #用以自定义显示
 
     def __init__(self,model_class,site):
@@ -34,15 +36,17 @@ class BaseYinGunAdmin(object):
             #     class Meta:
             #         model = self.model_class
             #         fields = "__all__"
-            s = self.model_class.__doc__.split(",")[1:-1]
+            s = self.model_class._meta.fields
+
             error_msg = {}
             wid = {}
             for i in s:
-                error_msg[i] = {'required':'内容不能为空','invalid':'格式错误'}
-                wid[i] = widgets.TextInput(attrs={"class":"form-control"},)
-
-            print(error_msg)
-            print(wid)
+                error_msg[i.name] = {'required':'内容不能为空','invalid':'格式错误'}
+                if i.name == "ug":
+                     ww = widgets.Select(attrs={"class":"form-control"},)
+                else:
+                    ww = widgets.TextInput(attrs={"class":"form-control"},)
+                wid[i.name] =ww
             #未解决
             params = {
                 "model":self.model_class,
@@ -87,13 +91,41 @@ class BaseYinGunAdmin(object):
         add_url = "{0}?{1}".format(base_add_url,param_dict.urlencode()) #把值传给添加url，携带用以返回当前目录
         # print(add_url)
 
-        #生成页面上：表格
-        result_list = self.model_class.objects.all() #从数据库中获取数据 对象列表
+        #分页 开始
+        condition = {}
+        from utils.my_page import PageInfo
+        all_count = self.model_class.objects.filter(**condition).count()
+        base_page_url = reverse("{0}:{1}_{2}_changelist".format(self.site.namespace,self.app_label,self.model_name)) #反向获取操作的url
+        page_param_dict = copy.deepcopy(request.GET)  #获取页面 URL GET方式传入的参数
+        page_param_dict._mutable = True #可更改
+
+        page_obj = PageInfo(request.GET.get("page"),all_count,base_page_url,page_param_dict)
+        #获取数据生成页面上：表格
+        result_list = self.model_class.objects.filter(**condition)[page_obj.start:page_obj.end] #从数据库中获取数据 对象列表
+        #分页结束
+
+        ######Action操作####
+        #get请求，显示下拉框
+        action_list = []
+        for item in self.action_list:
+            tpl = {"name":item.__name__,"text":item.text}
+            action_list.append(tpl)
+        if request.method == "POST":
+            #1、获取action
+            func_name_str = request.POST.get("action")
+            ret = getattr(self,func_name_str)(request)
+            action_url = reverse("{0}:{1}_{2}_changelist".format(self.site.namespace,self.app_label,self.model_name)) #反向获取添加操作的url
+            if ret:
+                action_url = "{0}?{1}".format(action_url,request.GET.urlencode())
+            return redirect(action_url)
+
         context = {
             "result_list":result_list,
             "list_display":self.list_display,
             "ygadmin_obj":self,
             "add_url":add_url,
+            "page_str":page_obj.pager,
+            "action_list":action_list,
         }
 
         return render(request, "yg/change_list.html",context)
@@ -112,14 +144,19 @@ class BaseYinGunAdmin(object):
             model_form_obj = self.add_or_edit_modelform()(data=request.POST,files=request.FILES)
             if model_form_obj.is_valid():#验证
                 #验证成功保存到数据库及跳转到查询页
-                model_form_obj.save() #保存到数据库
-                base_list_url = reverse("{0}:{1}_{2}_changelist".format(self.site.namespace, self.app_label, self.model_name))  # 反向获取添加操作的url
-                list_url = "{0}?{1}".format(base_list_url, paras)  # 把值传给添加url，携带用以返回当前目录
-                return redirect(list_url)
+                obj = model_form_obj.save() #保存到数据库
+                popid = request.GET.get("popup") #获取添加操作时，url传回的值
+                # 如果是popup 弹窗添加的话 就执行这个
+                if popid:
+                    return render(request,"yg/popup_response.html",{'data_dict':{ 'pk': obj.pk,'text':str(obj),'popid':popid}})
+                #如果是页面直接url访问
+                else:
+                    base_list_url = reverse("{0}:{1}_{2}_changelist".format(self.site.namespace, self.app_label, self.model_name))  # 反向获取添加操作的url
+                    list_url = "{0}?{1}".format(base_list_url, paras)  # 把值传给添加url，携带用以返回当前目录
+                    return redirect(list_url)
 
         context = {
             "form":model_form_obj,
-            "ygadmin_obj": self,
         }
 
         return render(request,"yg/add.html",context)
@@ -150,12 +187,12 @@ class BaseYinGunAdmin(object):
         if not obj:
             return HttpResponse("ID不存在")
         if request.method == "GET":
-            model_form_obj = self.add_or_edit_modelform()(instance=obj)
+            model_form_obj = self.add_or_edit_modelform()(instance=obj)#传入默认值，instance
         else:
             paras = request.GET.get("_changelistfilter")
-            model_form_obj = self.add_or_edit_modelform()(data=request.POST,files=request.FILES,instance=obj)
+            model_form_obj = self.add_or_edit_modelform()(data=request.POST,files=request.FILES,instance=obj) #若想修改，必须有原始的值
             if model_form_obj.is_valid:
-                model_form_obj.save()
+                model_form_obj.save() #保存数据，没有初始值就会创建一条数据，有初始值的话会完成修改
                 base_list_url = reverse("{0}:{1}_{2}_changelist".format(self.site.namespace, self.app_label,
                                                                         self.model_name))  # 反向获取添加操作的url
                 list_url = "{0}?{1}".format(base_list_url, paras)  # 把值传给添加url，携带用以返回当前目录
@@ -164,7 +201,6 @@ class BaseYinGunAdmin(object):
         # 3. 返回页面
         context = {
             "form": model_form_obj,
-            "ygadmin_obj": self,
         }
 
         return render(request, "yg/edit.html", context)

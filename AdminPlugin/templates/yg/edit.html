@@ -1,21 +1,14 @@
 {% load yg_inputs %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
 </head>
 <body>
-<h1>添加数据</h1>
-<form class="form-horizontal" novalidate>
-    {% csrf_token %}
-    {% func form ygadmin_obj %}
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success">提交</button>
-        </div>
-    </div>
-</form>
+<h1>修改数据</h1>
+{% func form %}
 </body>
 </html>

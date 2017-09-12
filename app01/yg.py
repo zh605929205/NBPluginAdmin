@@ -46,7 +46,7 @@ class YinGunUserInfo(v1.BaseYinGunAdmin):
         if is_header:
             return "选项"
         else:
-            tag = "<input type='checkbox' value='{0}'>".format(obj.pk)
+            tag = "<input name='pk' type='checkbox' value='{0}'>".format(obj.pk)
             return mark_safe(tag)
 
     def comb(self,obj=None,is_header=False):
@@ -61,6 +61,21 @@ class YinGunUserInfo(v1.BaseYinGunAdmin):
         else:
             return "%s-%s"%(obj.name,obj.age,)
 
+    def initial(self,request):
+        """
+
+        :param request:
+        :return: True 当前页面不动;False跳转
+        """
+        pk_list = request.POST.getlist("pk")
+        models.Users.objects.filter(pk__in=pk_list).update(name="赵四")
+        return True
+    initial.text = "初始化"
+
+    def multi_del(self,request):
+        pass
+    multi_del.text = "批量删除"
+    action_list = [initial,multi_del]
     list_display = [checkbox,"id","name","email","age",comb,func] #自定义要显示的列名或方法
 
 class YinGunRole(v1.BaseYinGunAdmin):
@@ -68,4 +83,5 @@ class YinGunRole(v1.BaseYinGunAdmin):
 
 v1.site.register(models.Users,YinGunUserInfo)
 v1.site.register(models.Role,YinGunRole)
+v1.site.register(models.UserGroup,)
 
