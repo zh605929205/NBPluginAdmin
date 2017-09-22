@@ -78,6 +78,28 @@ class YinGunUserInfo(v1.BaseYinGunAdmin):
     action_list = [initial,multi_del]
     list_display = [checkbox,"id","name","email","age",comb,func] #自定义要显示的列名或方法
 
+    from AdminPlugin.utils.filter_code import FilterOption
+
+    def email(self, option, request):
+        """
+        名字必须和数据库字段名一致
+        自定义字段处理函数，必须返回一个FilterList对象
+        :param option:  FilterOption对象
+        :param request: 请求信息
+        :return:
+        """
+        from AdminPlugin.utils.filter_code import FilterList
+        queryset = models.Users.objects.filter(id__gt=2) #自定义获取数据信息
+        return FilterList(option, queryset, request)
+    #利用 FilterOption 类封装的多个对象
+    filter_list = [
+        FilterOption("name", False, text_func_name="text_username", val_func_name="value_username"),
+        FilterOption("email", False, text_func_name="text_email", val_func_name="value_email"),
+        FilterOption("age", False, text_func_name="text_age", val_func_name="value_age"),
+        FilterOption("ug", True),
+        FilterOption("rm", True),
+    ]
+
 class YinGunRole(v1.BaseYinGunAdmin):
     list_display = ["id","name"]
 

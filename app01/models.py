@@ -23,5 +23,23 @@ class Users(models.Model):
     ug = models.ForeignKey(to=UserGroup,null=True,blank=True,verbose_name="用户组")
     rm = models.ManyToManyField(to=Role,verbose_name="角色")
 
+    def text_username(self):
+        return self.name
+
+    def value_username(self):
+        return self.name
+
+    def text_email(self):
+        return self.email
+
+    def value_email(self):
+        return self.email
+
+    def text_age(self):
+        return self.age
+
+    def value_age(self):
+        return self.age
+
     def __str__(self):
         return self.name

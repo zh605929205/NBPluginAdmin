@@ -1,20 +1,23 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
-from django.shortcuts import HttpResponse,render,redirect
+import copy
+
 from django.conf.urls import url,include
-from django.urls import reverse
-from django.http.request import QueryDict
 from django.forms import ModelForm
 from django.forms import widgets
-import copy
+from django.http.request import QueryDict
+from django.shortcuts import HttpResponse,render,redirect
+from django.urls import reverse
+
 
 class BaseYinGunAdmin(object):
 
     #用于app内所有数据库信息操作的生成
 
     list_display = "__all__"
-    action_list = []
+    action_list = [] #用于定制action操作的列表
     operate_model_form = None  #用以自定义显示
+    filter_list = []  #用于组合筛选的列表
 
     def __init__(self,model_class,site):
         self.model_class = model_class
@@ -23,6 +26,38 @@ class BaseYinGunAdmin(object):
 
         self.app_label = model_class._meta.app_label
         self.model_name = model_class._meta.model_name
+
+    """2. 定制列表中的筛选条件"""
+    def get_model_field_name_list(self):
+        """
+        获取当前model中定义的字段
+        :return:
+        """
+        # print(type(self.model_class._meta))
+        from django.db.models.options import Options
+        return [item.name for item in self.model_class._meta.fields]
+
+    def get_model_field_name_list_m2m(self):
+        return [item.name for item in self.model_class._meta.many_to_many]
+
+    def get_all_model_field_name_list(self):
+        """
+        # 获取当前model中定义的字段（包括反向查找字段）
+        :return:
+        """
+        return [item.name for item in self.model_class._meta._get_fields()]
+
+    def get_change_list_condition(self, query_params):
+
+        # 获取当前访问的数据类 self.model_class
+        field_list = self.get_all_model_field_name_list()
+        condition = {}
+        for k in query_params:
+            if k not in field_list:
+                # raise Exception('条件查询字段%s不合法，合法字段为：%s' % (k, ",".join(field_list)))
+                continue
+            condition[k + "__in"] = query_params.getlist(k)
+        return condition
 
     def add_or_edit_modelform(self):
         """
@@ -39,20 +74,20 @@ class BaseYinGunAdmin(object):
             s = self.model_class._meta.fields
 
             error_msg = {}
-            wid = {}
-            for i in s:
-                error_msg[i.name] = {'required':'内容不能为空','invalid':'格式错误'}
-                if i.name == "ug":
-                     ww = widgets.Select(attrs={"class":"form-control"},)
-                else:
-                    ww = widgets.TextInput(attrs={"class":"form-control"},)
-                wid[i.name] =ww
-            #未解决
+            # wid = {}
+            # for i in s:
+            #     error_msg[i.name] = {'required':'内容不能为空','invalid':'格式错误'}
+            #     if i.name == "ug":
+            #          ww = widgets.Select(attrs={"class":"form-control"},)
+            #     else:
+            #         ww = widgets.TextInput(attrs={"class":"form-control"},)
+            #     wid[i.name] =ww
+            # #未解决
             params = {
                 "model":self.model_class,
                 "fields":"__all__",
                 "error_messages":error_msg,
-                "widgets":wid,
+                # "widgets":wid,
             }
 
             _m = type("Meta",(object,),params)
@@ -73,6 +108,13 @@ class BaseYinGunAdmin(object):
         ]
         return urlpatterns
 
+    def another_urls(self):
+        """
+        钩子函数，用于自定义额外的URL
+        :return:
+        """
+        return []
+
     def changelist_view(self,request):
         """
         查看列表
@@ -81,6 +123,7 @@ class BaseYinGunAdmin(object):
         """
         #生成页面上：添加按钮
         self.request = request #当前请求信息
+        result_lists = self.model_class.objects.filter(**self.get_change_list_condition(request.GET))
 
         param_dict = QueryDict(mutable=True) #获取 字典 对象，改成可修改的类型
         if request.GET: #如果有值
@@ -92,16 +135,18 @@ class BaseYinGunAdmin(object):
         # print(add_url)
 
         #分页 开始
-        condition = {}
-        from utils.my_page import PageInfo
-        all_count = self.model_class.objects.filter(**condition).count()
+        # condition = {}
+        from AdminPlugin.utils.my_page import PageInfo
+        # all_count = self.model_class.objects.filter(**condition).count()
+
+        all_count = result_lists.count()
         base_page_url = reverse("{0}:{1}_{2}_changelist".format(self.site.namespace,self.app_label,self.model_name)) #反向获取操作的url
         page_param_dict = copy.deepcopy(request.GET)  #获取页面 URL GET方式传入的参数
         page_param_dict._mutable = True #可更改
 
         page_obj = PageInfo(request.GET.get("page"),all_count,base_page_url,page_param_dict)
         #获取数据生成页面上：表格
-        result_list = self.model_class.objects.filter(**condition)[page_obj.start:page_obj.end] #从数据库中获取数据 对象列表
+        result_list = result_lists[page_obj.start:page_obj.end] #从数据库中获取数据 对象列表
         #分页结束
 
         ######Action操作####
@@ -119,6 +164,30 @@ class BaseYinGunAdmin(object):
                 action_url = "{0}?{1}".format(action_url,request.GET.urlencode())
             return redirect(action_url)
 
+        # ############ 组合搜索操作 ##############
+        from AdminPlugin.utils.filter_code import FilterList
+
+        filter_list = [] #先定义一个空列表，用于存放处理之后的信息
+        for option in self.filter_list:#循环列表，获取每个FilterOption对象
+            if option.is_func: #调用对象下的 is_func方法，判断是否传入的第一个参数是否为函数
+                data_list = option.field_or_func(self, option, request) #如果是函数，就把当前对象，请求信息交给该函数处理
+            else:#不是函数，那就是字段
+                from django.db.models import ForeignKey, ManyToManyField #用于验证
+                field = self.model_class._meta.get_field(option.field_or_func) #通过对象中传入的field_or_func参数，获取对应数据库中的field对象
+                #获取关联表的数据
+                if isinstance(field, ForeignKey): #判断字段类型，如果是外键或是字符串
+                    # print(field.rel.model) # ug       -> UserGroup表
+                    #把当前FilterOption对象，对应的数据库数据，request请求传递给FilterList类，实例化得到一个对应的对象
+                    data_list = FilterList(option, field.rel.model.objects.all(), request)
+                elif isinstance(field, ManyToManyField):#判断时候是多对多类型的字段
+                    # print(field.rel.model) # rm      -> Role表
+                    data_list = FilterList(option, field.rel.model.objects.all(), request)
+                else:
+                    # print(field.model, self.model_class)
+                    #以上都不满足的话，就直接获取自己表的数据
+                    data_list = FilterList(option, field.model.objects.all(), request)
+            filter_list.append(data_list) #把实例化的 FilterList 对象添加到列表中，传递给前端
+
         context = {
             "result_list":result_list,
             "list_display":self.list_display,
@@ -126,6 +195,7 @@ class BaseYinGunAdmin(object):
             "add_url":add_url,
             "page_str":page_obj.pager,
             "action_list":action_list,
+            "filter_list":filter_list,
         }
 
         return render(request, "yg/change_list.html",context)
