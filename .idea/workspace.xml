@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c47d8bc-0701-4dd0-955d-837bd4b20892" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AdminPlugin/middleware/rbac.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AdminPlugin/service/rbac.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AdminPlugin/templatetags/rbac.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AdminPlugin/models.py" afterPath="$PROJECT_DIR$/AdminPlugin/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ORM_Admin/settings.py" afterPath="$PROJECT_DIR$/ORM_Admin/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app01/models.py" afterPath="$PROJECT_DIR$/app01/models.py" />
+>>>>>>> dev
     </list>
     <ignored path="ORM_Admin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,6 +46,7 @@
     <favorites_list name="ORM_Admin" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="yg_list.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AdminPlugin/templatetags/yg_list.py">
@@ -48,6 +59,9 @@
         </entry>
       </file>
     </leaf>
+=======
+    <leaf />
+>>>>>>> dev
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -78,11 +92,9 @@
         <option value="$PROJECT_DIR$/templates/add_test.html" />
         <option value="$PROJECT_DIR$/AdminPlugin/templatetags/yg_inputs.py" />
         <option value="$PROJECT_DIR$/AdminPlugin/templates/yg/add.html" />
-        <option value="$PROJECT_DIR$/ORM_Admin/settings.py" />
         <option value="$PROJECT_DIR$/AdminPlugin/templates/yg/edit.html" />
         <option value="$PROJECT_DIR$/utils/my_page.py" />
         <option value="$PROJECT_DIR$/AdminPlugin/static/js/1111.css" />
-        <option value="$PROJECT_DIR$/app01/models.py" />
         <option value="$PROJECT_DIR$/AdminPlugin/templates/yg/change_list.html" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/AdminPlugin/utils/filter_code.py" />
@@ -91,6 +103,9 @@
         <option value="$PROJECT_DIR$/ORM_Admin/urls.py" />
         <option value="$PROJECT_DIR$/AdminPlugin/service/v1.py" />
         <option value="$PROJECT_DIR$/AdminPlugin/templates/yg/inputs.html" />
+        <option value="$PROJECT_DIR$/ORM_Admin/settings.py" />
+        <option value="$PROJECT_DIR$/AdminPlugin/models.py" />
+        <option value="$PROJECT_DIR$/app01/models.py" />
       </list>
     </option>
   </component>
@@ -101,9 +116,16 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="496" />
     <option name="width" value="1386" />
     <option name="height" value="738" />
+=======
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
+>>>>>>> dev
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -130,8 +152,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
       <pane id="Scratches" />
+=======
+>>>>>>> dev
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -160,7 +185,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="ORM_Admin" />
+=======
+              <option name="myItemId" value="app01" />
+>>>>>>> dev
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -174,6 +203,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="AdminPlugin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -198,28 +228,38 @@
           </PATH>
         </subPane>
       </pane>
+=======
+              <option name="myItemId" value="ORM_Admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+>>>>>>> dev
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="H:/Python学习/python全栈4期/视频/Python_fullstack_s4 CRM开发-day128/pro_admin-2" />
+    <property name="last_opened_file_path" value="H:/Python学习/python全栈4期/视频/Python_fullstack_s4 CRM开发-day128/pro_admin-3" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\ORM_Admin\AdminPlugin\service" />
+      <recent name="F:\ORM_Admin\AdminPlugin" />
+      <recent name="F:\ORM_Admin\AdminPlugin\templatetags" />
+      <recent name="F:\ORM_Admin\utils" />
+      <recent name="F:\ORM_Admin\AdminPlugin\templates\yg" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\ORM_Admin\AdminPlugin" />
       <recent name="F:\ORM_Admin\static\plugins" />
       <recent name="F:\ORM_Admin\AdminPlugin\templates\yg" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\ORM_Admin\utils" />
-      <recent name="F:\ORM_Admin\AdminPlugin\templates\yg" />
-      <recent name="F:\ORM_Admin\static\js" />
-      <recent name="F:\ORM_Admin\static\plugins" />
-      <recent name="F:\ORM_Admin\app02" />
     </key>
   </component>
   <component name="RunManager" selected="Django server.ORM_Admin">
@@ -529,10 +569,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="496" y="0" width="1386" height="738" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13650076" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+=======
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13918306" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+>>>>>>> dev
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289256" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52334946" sideWeight="0.5030257" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976282" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -570,14 +617,34 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python36/site-packages/django/http/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="374" column="49" selection-start-line="374" selection-start-column="42" selection-end-line="374" selection-end-column="49" />
+    <entry file="dbDummy://dbtable:/37264852/0d11edf2-eb49-4aae-ada6-8464097060f8/app01_users">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/37264852/0d11edf2-eb49-4aae-ada6-8464097060f8/app01_users">
+<<<<<<< HEAD
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/37264852/0d11edf2-eb49-4aae-ada6-8464097060f8/app01_users">
+=======
+>>>>>>> dev
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -612,6 +679,7 @@
           <filtering enabled="true" />
         </state>
       </provider>
+<<<<<<< HEAD
     </entry>
     <entry file="dbDummy://dbtable:/37264852/0d11edf2-eb49-4aae-ada6-8464097060f8/app01_users">
       <provider editor-type-id="text-editor">
@@ -624,30 +692,8 @@
           <filtering enabled="true" />
         </state>
       </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/37264852/0d11edf2-eb49-4aae-ada6-8464097060f8/app01_users">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/37264852/0d11edf2-eb49-4aae-ada6-8464097060f8/app01_users">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
+=======
+>>>>>>> dev
     </entry>
     <entry file="file://$PROJECT_DIR$/AdminPlugin/static/plugins/bootstrap-3.3.7-dist/js/npm.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -697,6 +743,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/AdminPlugin/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -704,6 +751,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> dev
     <entry file="dbDummy://dbtable:/37264852/0d11edf2-eb49-4aae-ada6-8464097060f8/app01_role">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -737,6 +786,17 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+<<<<<<< HEAD
+=======
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_test.html" />
+    <entry file="file://$PROJECT_DIR$/app01/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> dev
         </state>
       </provider>
     </entry>
@@ -757,6 +817,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/test.html" />
     <entry file="file://$PROJECT_DIR$/templates/popup_response.html" />
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/ORM_Admin/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> dev
     <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python36/site-packages/django/forms/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -794,6 +864,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py" />
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/AdminPlugin/templates/yg/popup_response.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AdminPlugin/templates/yg/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> dev
     <entry file="file://$PROJECT_DIR$/AdminPlugin/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -836,6 +923,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app01/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1050">
@@ -843,6 +931,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> dev
     <entry file="file://$PROJECT_DIR$/ORM_Admin/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
@@ -909,6 +999,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AdminPlugin/apps.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="150">
           <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
           <folding />
@@ -927,6 +1018,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1050">
           <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+=======
+        <state relative-caret-position="375">
+          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+>>>>>>> dev
         </state>
       </provider>
     </entry>
@@ -941,6 +1036,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
           <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AdminPlugin/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AdminPlugin/templatetags/rbac.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AdminPlugin/service/rbac.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AdminPlugin/middleware/rbac.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ORM_Admin/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="141" column="20" selection-start-line="141" selection-start-column="20" selection-end-line="141" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
           <folding />
         </state>
       </provider>
